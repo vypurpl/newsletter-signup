@@ -1,0 +1,61 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: newsletter-signup
+  namespace: newsletter-demo
+  labels:
+    app: newsletter-signup
+    function: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: newsletter-signup
+  template:
+    metadata:
+      labels:
+        app: newsletter-signup
+    spec:
+      containers:
+        - name: newsletter-signup
+          image: vypurpl/newsletter-signup:1.0.0
+          ports:
+            - containerPort: 3000
+          livenessProbe:
+            httpGet:
+              path: /healthcheck
+              port: 3000
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /healthcheck
+              port: 3000
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+          env:
+            - name: AIRTABLE_API_KEY
+              valueFrom:
+                 secretKeyRef:
+                   name: airtable-secrets
+                   key: AIRTABLE_API_KEY
+            - name: AIRTABLE_BASE
+              valueFrom:
+                 secretKeyRef:
+                   name: airtable-secrets
+                   key: AIRTABLE_BASE
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: newsletter-signup
+spec:
+  selector:
+    app: newsletter-signup
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+  type: NodePort
