@@ -1,4 +1,4 @@
-#Newsletter Sign Up
+# Newsletter Sign Up
 
 ## About
 This repository is a simple application built using react and express which integrates with [airtable](https://airtable.com/). 
