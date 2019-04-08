@@ -3,9 +3,9 @@ type: KUBERNETES
 containerDefinition:
   commands:
   - ''
-  cpu: 1
+  cpu: 0
   logConfiguration: {}
-  memory: 5
+  memory: 2
   name: DEFAULT_NAME
   portMappings:
   - containerPort: 3000
