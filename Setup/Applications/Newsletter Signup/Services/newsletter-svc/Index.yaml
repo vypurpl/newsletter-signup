@@ -1,6 +1,10 @@
 harnessApiVersion: '1.0'
 type: SERVICE
 artifactType: DOCKER
+configVariables:
+- name: AIRTABLE_API_KEY
+  value: bananans
+  valueType: TEXT
 deploymentType: KUBERNETES
 description: Kubernetes Newsletter Service
 helmValueYaml: |
