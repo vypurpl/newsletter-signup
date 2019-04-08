@@ -1,0 +1,12 @@
+harnessApiVersion: '1.0'
+type: KUBERNETES
+containerDefinition:
+  commands:
+  - ''
+  cpu: 1
+  logConfiguration: {}
+  memory: 5
+  name: DEFAULT_NAME
+  portMappings:
+  - containerPort: 3000
+    hostPort: 3000
